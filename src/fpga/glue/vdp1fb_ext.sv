@@ -392,7 +392,9 @@ module vdp1fb_ext #(
 		.cmd_addr(clr_on ? {clr_blk[13], 4'd0, clr_blk[12:0], 5'd0} :
 		          psel ? {a_die1, 4'd0, a_a17_1, m_addr[1]} : {a_die0, 4'd0, a_a17_0, m_addr[0]}),
 		.cmd_len(clr_on ? 5'd31 : psel ? m_len[1] : m_len[0]),
+`ifdef A6_DBG
 		.gap2(d_gap2), .dbg_rw(p_rw), .dbg_ww(p_ww),
+`endif
 		.wd_pop(p_pop), .wd_data(clr_on ? 16'h0000 : own ? m_wd[1] : m_wd[0]), .wd_be(clr_on ? 2'b11 : own ? m_wbe[1] : m_wbe[0]),
 		.rd_valid(p_rv), .rd_data(p_rd), .rd_last(p_rl), .cfg_done(p_cfg),
 `else
