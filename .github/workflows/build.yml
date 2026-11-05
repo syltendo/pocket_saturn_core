@@ -1,0 +1,87 @@
+name: Build Saturn core
+
+# Builds the Analogue Pocket bitstream for akoaysigod/pocket_saturn_core v0.1,
+# whose GitHub release is source-only. Steps:
+#   1. fetch the SMPC ROM (smpc.mif) from the upstream Saturn_MiSTer commit the
+#      port is based on (the ROM is a firmware-build input only, never packaged)
+#   2. build the CD block / SMPC firmware (clang + ld.lld, RISC-V) into the two
+#      .hex files the RTL reads
+#   3. compile the FPGA design with Quartus 18.1 in Docker (matches ap_core.qpf)
+#   4. package the SD-card tree with the author's tools/package.py and the
+#      dist/ tree in this repo, and upload the installable zip as an artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 350
+    steps:
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: false
+          swap-storage: false
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install firmware toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang lld llvm
+
+      - name: Fetch SMPC ROM from upstream (pinned commit)
+        run: |
+          curl -sL -o src/fpga/rtl/Saturn/SMPC/smpc.mif \
+            https://raw.githubusercontent.com/MiSTer-devel/Saturn_MiSTer/9aa9449/rtl/Saturn/SMPC/smpc.mif
+          head -3 src/fpga/rtl/Saturn/SMPC/smpc.mif
+          grep -q 'WIDTH=10' src/fpga/rtl/Saturn/SMPC/smpc.mif
+
+      - name: Build CD/SMPC firmware
+        run: |
+          cd src/fw/cdb
+          SMPC_FW=1 CD_SRC=1 LLVM=/usr/bin LD_LLD=/usr/bin/ld.lld sh ./build.sh
+          ls -l ../../fpga/rtl/Saturn/CD/cdb_hle_pocket_fw.hex ../../fpga/rtl/Saturn/CD/cdb_hle_pocket_fw_1.hex
+
+      - name: Compile with Quartus 18.1
+        run: |
+          docker run --rm \
+            -v "$PWD:/build" -w /build/src/fpga \
+            raetro/quartus:18.1 \
+            bash -c 'quartus_sh --flow compile ap_core'
+          ls -l src/fpga/output_files/ap_core.rbf
+
+      - name: Package SD card zip
+        run: |
+          mkdir -p build
+          python3 tools/package.py \
+            --rbf src/fpga/output_files/ap_core.rbf \
+            --dist dist \
+            --core akoaysigod.Saturn \
+            --out build/sdroot \
+            --zip build/akoaysigod.Saturn_0.1-pocket.zip
+          unzip -l build/akoaysigod.Saturn_0.1-pocket.zip
+
+      - name: Upload installable zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: saturn-core-pocket
+          path: build/akoaysigod.Saturn_0.1-pocket.zip
+          if-no-files-found: error
+
+      - name: Upload Quartus reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quartus-reports
+          path: |
+            src/fpga/output_files/*.rpt
+            src/fpga/output_files/*.summary
+          if-no-files-found: warn
