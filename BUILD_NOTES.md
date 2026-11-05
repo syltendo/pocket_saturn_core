@@ -12,7 +12,7 @@ files fetched/generated at build time (below).
 
 - **CD/SMPC firmware** (`src/fpga/rtl/Saturn/CD/cdb_hle_pocket_fw.hex` +
   `_1.hex`): built by the author's own `src/fw/cdb/build.sh`
-  (`SMPC_FW=1 CD_SRC=1`) with clang/lld. Its one external input is the SMPC
+  (`SMPC_FW=1 CD_SRC=1`) with clang/lld (LLVM >= 17: the link uses `--relax-gp`). Its one external input is the SMPC
   MCU ROM, `smpc.mif`, which the author develops against but does not ship.
   The port's README pins the upstream base to Saturn_MiSTer commit `9aa9449`
   (2026-10-19), and that repo does ship the file
