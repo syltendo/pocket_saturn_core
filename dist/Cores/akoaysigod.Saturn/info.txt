@@ -1,0 +1,8 @@
+Sega Saturn core for Analogue Pocket (test build 0.1)
+Port of the Saturn_MiSTer core by akoaysigod.
+
+Needs your own Saturn BIOS at Assets/saturn/common/boot.rom
+and CD games as cue/bin in Assets/saturn/common/<Game>/,
+with an instance JSON per game (Pocket Sync can build them).
+Internal + cartridge backup RAM are saved per game.
+No save states. Region and cartridge type are in Core Settings.

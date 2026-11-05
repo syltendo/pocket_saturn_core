@@ -1,0 +1,34 @@
+{
+    "output": "Assets/saturn/akoaysigod.Saturn",
+    "platform_id": "saturn",
+    "slot_limit": {
+        "count": 32,
+        "message": "Games with more than 32 disc files are not supported by this core."
+    },
+    "data_slots": [
+        {
+            "id": 14,
+            "filename": "*.cue",
+            "sort": "single",
+            "required": false
+        },
+        {
+            "id": 16,
+            "filename": "*.bin",
+            "sort": "ascending",
+            "required": true
+        }
+    ],
+    "overrides": {
+        "common": {
+            "data_slots": [
+                {
+                    "id": 16,
+                    "filename": "no game in this folder",
+                    "sort": "single",
+                    "required": true
+                }
+            ]
+        }
+    }
+}
