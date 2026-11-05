@@ -54,3 +54,31 @@ slot 14 = the `.cue`, slots 16, 17, … = the cue's files in order.
 Status: **test build**. The author has not published or endorsed this build;
 timing closure and on-hardware behaviour are unverified until tested on a
 real Pocket.
+
+## Build outcome (2026-11-05) — PARKED at the owner's request after 15 CI runs
+
+No installable bitstream yet. The firmware problem is SOLVED; the FPGA fit is not.
+
+Firmware (runs 1–7): builds and links with **LLVM 21** (apt.llvm.org) plus the
+author's own env knobs `CD_SRC_L2=0` and `SMPC_DEFS=-Oz` — no source edits.
+Measured final-section overflows before the knobs: clang 18 +6,380 B,
+clang 20 +3,052 B, clang 21 +2,984 B, +L2 off +2,128 B, +Oz = fits.
+`ci/build-firmware.sh` encodes all of this.
+
+Fit (device 5CEBA4F23C8: 1,848 LABs): every full compile missed by single
+digits. Best result **1,850 LABs (run 12)** with the configuration now
+restored in ap_core.qsf: author's settings + FITTER_EFFORT STANDARD FIT,
+single SEED 19 (the author's own line; a duplicate SEED added earlier in the
+file was silently overridden — removed), `POCKET_ARB_LEAN=1` (the author's
+Pocket-build option: backup port reads single words), and `A6_DBG` removed
+(diagnostic build: debug squares + 4 tuning toggles; its interact vars 8–11
+were also dropped from dist). One RTL patch was needed for the A6-less build:
+`src/fpga/glue/vdp1fb_ext.sv` — the A7 branch connected the A6 debug ports
+unconditionally; they are now `ifdef A6_DBG`-gated, mirroring the author's
+non-A7 branch (A5-path bit-rot fix).
+Other attempts: seed 3 = 1,862; +CUT_VDP2_2048 = 1,856; +CUT_SCU_DSTP +
+CUT_SCU_ABUSWR (run 15) = 1,853; physical synthesis EXTRA = 1,869 (worse).
+The author's own build presumably fits via a different Quartus point release
+or local settings not in the repo (unverified). To resume: dispatch the
+workflow on main; the dist/ tree and packaging are ready, so a fitting
+compile produces the installable zip with no further work.

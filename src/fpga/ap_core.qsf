@@ -806,8 +806,6 @@ set_global_assignment -name VERILOG_MACRO "SDRAM1_RFC_SPACE=1"
 set_global_assignment -name VERILOG_MACRO "FB0_PSRAM=1"
 set_global_assignment -name VERILOG_MACRO "A7_FIX=1"
 set_global_assignment -name VERILOG_MACRO "POCKET_ARB_LEAN=1"
-set_global_assignment -name VERILOG_MACRO "CUT_SCU_DSTP=1"
-set_global_assignment -name VERILOG_MACRO "CUT_SCU_ABUSWR=1"
 set_global_assignment -name VERILOG_MACRO "A7D_VSIG=1"
 # I/O cell registers for the memory buses (glue/REPORT 10: PSRAM / SRAM outputs are plain registers in psram_phy /
 # fb_sram; read data are sampled every clk_ram by psram_phy (dq_s) and on fb_sram's third clk)
