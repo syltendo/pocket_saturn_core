@@ -806,6 +806,7 @@ set_global_assignment -name VERILOG_MACRO "SDRAM1_RFC_SPACE=1"
 set_global_assignment -name VERILOG_MACRO "FB0_PSRAM=1"
 set_global_assignment -name VERILOG_MACRO "A7_FIX=1"
 set_global_assignment -name VERILOG_MACRO "POCKET_ARB_LEAN=1"
+set_global_assignment -name VERILOG_MACRO "CUT_VDP2_2048=1"
 set_global_assignment -name VERILOG_MACRO "A7D_VSIG=1"
 # I/O cell registers for the memory buses (glue/REPORT 10: PSRAM / SRAM outputs are plain registers in psram_phy /
 # fb_sram; read data are sampled every clk_ram by psram_phy (dq_s) and on fb_sram's third clk)
@@ -845,4 +846,4 @@ set_instance_assignment -name FAST_INPUT_REGISTER ON -to sram_dq[*]
 # (release 0.1). Another Quartus version or a source change may need another seed.
 
 set_global_assignment -name NUM_PARALLEL_PROCESSORS 1
-set_global_assignment -name SEED 3
+set_global_assignment -name SEED 19
