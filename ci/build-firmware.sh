@@ -24,7 +24,9 @@ cd "$(dirname "$0")/../src/fw/cdb"
 # CD_SRC_L2=0: the author's own size knob (build.sh header: leaving out the
 # second read-ahead level spares CD RAM). With L2 in, the image is ~3 KB over
 # the 88 KB RAM with clang 20/21; the knob is the documented way to fit it.
-if ! SMPC_FW=1 CD_SRC=1 CD_SRC_L2=0 LLVM=$LLVM LD_LLD=$LLVM/ld.lld sh ./build.sh; then
+# SMPC_DEFS=-Oz: build.sh appends SMPC_DEFS after its -Os flags, so -Oz wins.
+# With L2 off the image was still 2,128 B over; -Oz is the remaining squeeze.
+if ! SMPC_FW=1 CD_SRC=1 CD_SRC_L2=0 SMPC_DEFS=-Oz LLVM=$LLVM LD_LLD=$LLVM/ld.lld sh ./build.sh; then
   echo '--- firmware link failed; per-object section sizes ---'
   $LLVM/llvm-size -A obj/*.o || true
   exit 1
