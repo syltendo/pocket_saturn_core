@@ -21,5 +21,12 @@ export LLVM=/usr/lib/llvm-21/bin
 $LLVM/clang --version | head -1
 $LLVM/ld.lld --version | head -1
 cd "$(dirname "$0")/../src/fw/cdb"
-SMPC_FW=1 CD_SRC=1 LLVM=$LLVM LD_LLD=$LLVM/ld.lld sh ./build.sh
+# CD_SRC_L2=0: the author's own size knob (build.sh header: leaving out the
+# second read-ahead level spares CD RAM). With L2 in, the image is ~3 KB over
+# the 88 KB RAM with clang 20/21; the knob is the documented way to fit it.
+if ! SMPC_FW=1 CD_SRC=1 CD_SRC_L2=0 LLVM=$LLVM LD_LLD=$LLVM/ld.lld sh ./build.sh; then
+  echo '--- firmware link failed; per-object section sizes ---'
+  $LLVM/llvm-size -A obj/*.o || true
+  exit 1
+fi
 ls -l ../../fpga/rtl/Saturn/CD/cdb_hle_pocket_fw.hex ../../fpga/rtl/Saturn/CD/cdb_hle_pocket_fw_1.hex
