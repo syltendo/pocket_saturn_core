@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 350
     steps:
       - name: Free disk space
@@ -45,10 +45,7 @@ jobs:
           grep -q 'WIDTH=10' src/fpga/rtl/Saturn/SMPC/smpc.mif
 
       - name: Build CD/SMPC firmware
-        run: |
-          cd src/fw/cdb
-          SMPC_FW=1 CD_SRC=1 LLVM=/usr/bin LD_LLD=/usr/bin/ld.lld sh ./build.sh
-          ls -l ../../fpga/rtl/Saturn/CD/cdb_hle_pocket_fw.hex ../../fpga/rtl/Saturn/CD/cdb_hle_pocket_fw_1.hex
+        run: sh ci/build-firmware.sh
 
       - name: Compile with Quartus 18.1
         run: |
