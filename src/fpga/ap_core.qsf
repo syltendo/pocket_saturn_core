@@ -305,6 +305,8 @@ set_global_assignment -name ACTIVE_SERIAL_CLOCK FREQ_100MHZ
 set_global_assignment -name ROUTER_CLOCKING_TOPOLOGY_ANALYSIS ON
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
 set_global_assignment -name SEED 7
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA
 # area: the design fills the device; settings as in the measurement builds (no safe state machines, no
 # physical synthesis / retiming / LCELL insertion), registers packed for minimum area
 set_global_assignment -name AUTO_PACKED_REGISTERS_STRATIXII "MINIMIZE AREA"
@@ -806,6 +808,7 @@ set_global_assignment -name VERILOG_MACRO "CD_EXTIO=1"
 set_global_assignment -name VERILOG_MACRO "SDRAM1_RFC_SPACE=1"
 set_global_assignment -name VERILOG_MACRO "FB0_PSRAM=1"
 set_global_assignment -name VERILOG_MACRO "A7_FIX=1"
+set_global_assignment -name VERILOG_MACRO "POCKET_ARB_LEAN=1"
 set_global_assignment -name VERILOG_MACRO "A7D_VSIG=1"
 # I/O cell registers for the memory buses (glue/REPORT 10: PSRAM / SRAM outputs are plain registers in psram_phy /
 # fb_sram; read data are sampled every clk_ram by psram_phy (dq_s) and on fb_sram's third clk)
