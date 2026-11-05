@@ -1,278 +1,190 @@
 {
-    "interact": {
-        "magic": "APF_VER_1",
-        "variables": [
-            {
-                "name": "Reset",
-                "id": 1,
-                "type": "action",
-                "enabled": true,
-                "persist": false,
-                "writeonly": true,
-                "address": "0x80000000",
-                "value": 1
-            },
-            {
-                "name": "Cartridge",
-                "id": 2,
-                "type": "list",
-                "enabled": true,
-                "persist": true,
-                "writeonly": true,
-                "address": "0x80000004",
-                "defaultval": 0,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "Auto"
-                    },
-                    {
-                        "value": 1,
-                        "name": "ROM 2M"
-                    },
-                    {
-                        "value": 2,
-                        "name": "DRAM 1M"
-                    },
-                    {
-                        "value": 3,
-                        "name": "DRAM 4M"
-                    },
-                    {
-                        "value": 4,
-                        "name": "DRAM 6M DEV"
-                    },
-                    {
-                        "value": 5,
-                        "name": "Backup"
-                    },
-                    {
-                        "value": 6,
-                        "name": "None"
-                    }
-                ]
-            },
-            {
-                "name": "Region",
-                "id": 3,
-                "type": "list",
-                "enabled": true,
-                "persist": true,
-                "writeonly": true,
-                "address": "0x80000008",
-                "defaultval": 7,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "Japan"
-                    },
-                    {
-                        "value": 1,
-                        "name": "Taiwan"
-                    },
-                    {
-                        "value": 2,
-                        "name": "USA"
-                    },
-                    {
-                        "value": 3,
-                        "name": "Brazil"
-                    },
-                    {
-                        "value": 4,
-                        "name": "Korea"
-                    },
-                    {
-                        "value": 5,
-                        "name": "Asia PAL"
-                    },
-                    {
-                        "value": 6,
-                        "name": "Europe"
-                    },
-                    {
-                        "value": 7,
-                        "name": "Auto"
-                    }
-                ]
-            },
-            {
-                "name": "Timing",
-                "id": 4,
-                "type": "list",
-                "enabled": true,
-                "persist": true,
-                "writeonly": true,
-                "address": "0x8000000C",
-                "defaultval": 0,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "Original"
-                    },
-                    {
-                        "value": 1,
-                        "name": "Fast"
-                    }
-                ]
-            },
-            {
-                "name": "Blurred VDP1 mesh",
-                "id": 5,
-                "type": "list",
-                "enabled": true,
-                "persist": true,
-                "writeonly": true,
-                "address": "0x80000010",
-                "defaultval": 0,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "Off"
-                    },
-                    {
-                        "value": 1,
-                        "name": "On"
-                    }
-                ]
-            },
-            {
-                "name": "Deinterlacing",
-                "id": 6,
-                "type": "list",
-                "enabled": true,
-                "persist": true,
-                "writeonly": true,
-                "address": "0x80000014",
-                "defaultval": 0,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "Weave"
-                    },
-                    {
-                        "value": 1,
-                        "name": "Bob"
-                    }
-                ]
-            },
-            {
-                "name": "Button mapping",
-                "id": 7,
-                "type": "list",
-                "enabled": true,
-                "persist": true,
-                "writeonly": true,
-                "address": "0x80000018",
-                "defaultval": 0,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "ABC on Y B A, XYZ on L2 X Sel"
-                    },
-                    {
-                        "value": 1,
-                        "name": "ABC on Y B A, XYZ on L1 X R1"
-                    },
-                    {
-                        "value": 2,
-                        "name": "6-button: ABC on B A R1"
-                    },
-                    {
-                        "value": 3,
-                        "name": "ABC on B A Y, XYZ on L2 X R2"
-                    }
-                ]
-            },
-            {
-                "name": "FB layout",
-                "id": 8,
-                "type": "list",
-                "enabled": true,
-                "persist": false,
-                "writeonly": true,
-                "address": "0x80000030",
-                "defaultval": 0,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "A5"
-                    },
-                    {
-                        "value": 1,
-                        "name": "Layout 1"
-                    },
-                    {
-                        "value": 2,
-                        "name": "Layout 2"
-                    },
-                    {
-                        "value": 3,
-                        "name": "Layout 3"
-                    }
-                ]
-            },
-            {
-                "name": "Write combining",
-                "id": 9,
-                "type": "list",
-                "enabled": true,
-                "persist": false,
-                "writeonly": true,
-                "address": "0x80000034",
-                "defaultval": 0,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "On"
-                    },
-                    {
-                        "value": 1,
-                        "name": "Off"
-                    }
-                ]
-            },
-            {
-                "name": "Debug flags",
-                "id": 10,
-                "type": "list",
-                "enabled": true,
-                "persist": false,
-                "writeonly": true,
-                "address": "0x80000038",
-                "defaultval": 1,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "On"
-                    },
-                    {
-                        "value": 1,
-                        "name": "Off"
-                    }
-                ]
-            },
-            {
-                "name": "PSRAM gap",
-                "id": 11,
-                "type": "list",
-                "enabled": true,
-                "persist": false,
-                "writeonly": true,
-                "address": "0x8000003C",
-                "defaultval": 0,
-                "options": [
-                    {
-                        "value": 0,
-                        "name": "One cycle"
-                    },
-                    {
-                        "value": 1,
-                        "name": "Two cycles"
-                    }
-                ]
-            }
-        ],
-        "messages": []
-    }
+  "interact": {
+    "magic": "APF_VER_1",
+    "variables": [
+      {
+        "name": "Reset",
+        "id": 1,
+        "type": "action",
+        "enabled": true,
+        "persist": false,
+        "writeonly": true,
+        "address": "0x80000000",
+        "value": 1
+      },
+      {
+        "name": "Cartridge",
+        "id": 2,
+        "type": "list",
+        "enabled": true,
+        "persist": true,
+        "writeonly": true,
+        "address": "0x80000004",
+        "defaultval": 0,
+        "options": [
+          {
+            "value": 0,
+            "name": "Auto"
+          },
+          {
+            "value": 1,
+            "name": "ROM 2M"
+          },
+          {
+            "value": 2,
+            "name": "DRAM 1M"
+          },
+          {
+            "value": 3,
+            "name": "DRAM 4M"
+          },
+          {
+            "value": 4,
+            "name": "DRAM 6M DEV"
+          },
+          {
+            "value": 5,
+            "name": "Backup"
+          },
+          {
+            "value": 6,
+            "name": "None"
+          }
+        ]
+      },
+      {
+        "name": "Region",
+        "id": 3,
+        "type": "list",
+        "enabled": true,
+        "persist": true,
+        "writeonly": true,
+        "address": "0x80000008",
+        "defaultval": 7,
+        "options": [
+          {
+            "value": 0,
+            "name": "Japan"
+          },
+          {
+            "value": 1,
+            "name": "Taiwan"
+          },
+          {
+            "value": 2,
+            "name": "USA"
+          },
+          {
+            "value": 3,
+            "name": "Brazil"
+          },
+          {
+            "value": 4,
+            "name": "Korea"
+          },
+          {
+            "value": 5,
+            "name": "Asia PAL"
+          },
+          {
+            "value": 6,
+            "name": "Europe"
+          },
+          {
+            "value": 7,
+            "name": "Auto"
+          }
+        ]
+      },
+      {
+        "name": "Timing",
+        "id": 4,
+        "type": "list",
+        "enabled": true,
+        "persist": true,
+        "writeonly": true,
+        "address": "0x8000000C",
+        "defaultval": 0,
+        "options": [
+          {
+            "value": 0,
+            "name": "Original"
+          },
+          {
+            "value": 1,
+            "name": "Fast"
+          }
+        ]
+      },
+      {
+        "name": "Blurred VDP1 mesh",
+        "id": 5,
+        "type": "list",
+        "enabled": true,
+        "persist": true,
+        "writeonly": true,
+        "address": "0x80000010",
+        "defaultval": 0,
+        "options": [
+          {
+            "value": 0,
+            "name": "Off"
+          },
+          {
+            "value": 1,
+            "name": "On"
+          }
+        ]
+      },
+      {
+        "name": "Deinterlacing",
+        "id": 6,
+        "type": "list",
+        "enabled": true,
+        "persist": true,
+        "writeonly": true,
+        "address": "0x80000014",
+        "defaultval": 0,
+        "options": [
+          {
+            "value": 0,
+            "name": "Weave"
+          },
+          {
+            "value": 1,
+            "name": "Bob"
+          }
+        ]
+      },
+      {
+        "name": "Button mapping",
+        "id": 7,
+        "type": "list",
+        "enabled": true,
+        "persist": true,
+        "writeonly": true,
+        "address": "0x80000018",
+        "defaultval": 0,
+        "options": [
+          {
+            "value": 0,
+            "name": "ABC on Y B A, XYZ on L2 X Sel"
+          },
+          {
+            "value": 1,
+            "name": "ABC on Y B A, XYZ on L1 X R1"
+          },
+          {
+            "value": 2,
+            "name": "6-button: ABC on B A R1"
+          },
+          {
+            "value": 3,
+            "name": "ABC on B A Y, XYZ on L2 X R2"
+          }
+        ]
+      }
+    ],
+    "messages": []
+  }
 }

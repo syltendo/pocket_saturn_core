@@ -805,7 +805,6 @@ set_global_assignment -name VERILOG_MACRO "VDP1_FB_EXT=1"
 set_global_assignment -name VERILOG_MACRO "CD_EXTIO=1"
 set_global_assignment -name VERILOG_MACRO "SDRAM1_RFC_SPACE=1"
 set_global_assignment -name VERILOG_MACRO "FB0_PSRAM=1"
-set_global_assignment -name VERILOG_MACRO "A6_DBG=1"
 set_global_assignment -name VERILOG_MACRO "A7_FIX=1"
 set_global_assignment -name VERILOG_MACRO "A7D_VSIG=1"
 # I/O cell registers for the memory buses (glue/REPORT 10: PSRAM / SRAM outputs are plain registers in psram_phy /
